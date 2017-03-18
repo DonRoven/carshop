@@ -1,0 +1,28 @@
+{% extends "shop/base.html" %}
+
+{% block title %}
+  Оформлення заказу
+{% endblock %}
+
+{% block content %}
+  <h1>Оформлення заказу</h1>
+  <div class="col-sm-4">
+    <h2>Заповніть форму</h2>
+    <form class="order-form" action="." method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" value="Відправити">
+    </form>
+  </div>
+
+  <div class="order-info col-sm-8">
+    <h2>Ваш заказ</h2>
+    <ul>
+      {% for item in cart  %}
+        <li>
+          {{ item.product.name }} | Кількість: {{ item.quantity }} | Ціна: {{ item.total_price }}
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}
